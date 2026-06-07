@@ -31,9 +31,7 @@ export const PeoplePage = () => {
     return matchesQuery && matchesSex && matchesCentury;
   });
 
-  let sortedPeople = [...visiblePeople];
-
-  sortedPeople = sortedPeople.sort((a, b) => {
+  let sortedPeople = [...visiblePeople].sort((a, b) => {
     if (sort === 'name' || sort === 'sex') {
       return (a[sort as keyof Person] as string).localeCompare(
         b[sort as keyof Person] as string,
@@ -68,7 +66,7 @@ export const PeoplePage = () => {
       <div className="block">
         <div className="columns is-desktop is-flex-direction-row-reverse">
           <div className="column is-7-tablet is-narrow-desktop">
-            <PeopleFilters />
+            {!isLoading && people.length > 0 && <PeopleFilters />}
           </div>
 
           <div className="column">
@@ -92,7 +90,7 @@ export const PeoplePage = () => {
                   <p>
                     There are no people matching the current search criteria
                   </p>
-                )}
+              )}
             </div>
           </div>
         </div>
